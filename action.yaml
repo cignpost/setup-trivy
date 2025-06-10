@@ -53,14 +53,14 @@ runs:
     - name: Restore Trivy binary from cache
       if: ${{ inputs.cache == 'true' && inputs.version != 'latest' }}
       id: cache
-      uses: actions/cache@v4
+      uses: cignpost/cache@v4
       with:
         path: ${{ steps.binary-dir.outputs.dir }}
         key: trivy-binary-${{ inputs.version }}-${{ runner.os }}-${{ runner.arch }}
 
     - name: Checkout install script
       if: steps.cache.outputs.cache-hit != 'true'
-      uses: actions/checkout@v4
+      uses: cignpost/checkout@v4
       with:
         repository: aquasecurity/trivy
         sparse-checkout: |
